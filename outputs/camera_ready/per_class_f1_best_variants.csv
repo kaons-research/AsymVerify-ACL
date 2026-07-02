@@ -1,0 +1,4 @@
+model,configuration,clear_reply,ambivalent,clear_non_reply
+GLM-4.7,P1+P2+P3,0.629213,0.810256,0.750000
+DeepSeek-V3.2,P1+P3,0.569697,0.798077,0.514286
+Llama-3.3-70B,P1+P3,0.512000,0.831169,0.344828

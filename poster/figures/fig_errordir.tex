@@ -1,0 +1,27 @@
+\documentclass[border=2mm]{standalone}
+\input{common.tex}
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ---- geometry ----
+  \def\W{27}        % total bar width
+  \def\H{1.5}       % bar height
+  % segment fractions
+  \pgfmathsetmacro{\xA}{0.632*\W}            % end of segment A
+  \pgfmathsetmacro{\xB}{(0.632+0.289)*\W}    % end of segment B
+  \pgfmathsetmacro{\cA}{\xA/2}               % center A
+  \pgfmathsetmacro{\cB}{(\xA+\xB)/2}         % center B
+  \pgfmathsetmacro{\cC}{(\xB+\W)/2}          % center C
+  % ---- bar segments ----
+  \fill[passTwo]   (0,0)   rectangle (\xA,\H);
+  \fill[passThree] (\xA,0) rectangle (\xB,\H);
+  \fill[slateA]    (\xB,0) rectangle (\W,\H);
+  % ---- outer outline ----
+  \draw[line width=1pt,inkA] (0,0) rectangle (\W,\H);
+  % ---- inside labels ----
+  \node[white,font=\LARGE\bfseries] at (\cA,{\H/2}) {P2-aligned\quad 63.2\%};
+  \node[white,font=\LARGE\bfseries] at (\cB,{\H/2}) {P3-aligned\quad 28.9\%};
+  % ---- small segment C: label above with leader ----
+  \draw[line width=0.5pt,inkA] (\cC,\H) -- (\cC,{\H+0.55});
+  \node[inkA,font=\LARGE\bfseries,anchor=south] at (\cC,{\H+0.55}) {7.9\%};
+\end{tikzpicture}
+\end{document}

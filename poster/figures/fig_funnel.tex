@@ -1,0 +1,36 @@
+\documentclass[border=2mm]{standalone}
+\input{common.tex}
+\begin{document}
+\begin{tikzpicture}[font=\Large, every node/.style={font=\Large}]
+
+  % large, bold percentage labels + heavier arrows for a big poster figure
+  \tikzset{
+    lbl/.append style={font=\Large, inner sep=3pt},
+    fl/.append style ={line width=2.4pt},
+    flf/.append style={line width=1.8pt},
+  }
+
+  % ---- Ambivalent hub : the large circle on the right ----
+  \node[circle, draw=ambColor, line width=4pt, fill=ambColor!18, align=center,
+        minimum size=7.4cm] (amb) at (11.8,0)
+        {\textbf{Ambivalent}\\[2pt](AMB)\\[2pt]{\large the hub}};
+
+  % ---- Clear Reply : top-left ----
+  \node[rounded corners=4mm, draw=crColor, line width=2.2pt, fill=crColor!14,
+        align=center, minimum width=4.8cm, minimum height=2.8cm] (cr) at (0,3.6)
+        {\textbf{Clear Reply}\\[2pt](CR)};
+
+  % ---- Clear Non-Reply : bottom-left ----
+  \node[rounded corners=4mm, draw=cnrColor, line width=2.2pt, fill=cnrColor!14,
+        align=center, minimum width=4.8cm, minimum height=2.8cm] (cnr) at (0,-3.6)
+        {\textbf{Clear Non-Reply}\\[2pt](CNR)};
+
+  % ---- Converging solid arrows into the hub ----
+  \draw[fl] (cr)  -- (amb) node[lbl, pos=0.44] {\textbf{84\%}};
+  \draw[fl] (cnr) -- (amb) node[lbl, pos=0.44] {\textbf{13\%}};
+
+  % ---- Dashed exchange between CR and CNR (vertical, on the left) ----
+  \draw[flf] (cr) -- (cnr) node[lbl, pos=0.5] {\textbf{3\%}};
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,9 @@
+{
+  "n_dev": 308,
+  "glm_full_macro_f1": 0.729823,
+  "glm_full_accuracy": 0.753247,
+  "glm_full_calls_per_example": 1.484,
+  "confidence_bin_count_total": 308,
+  "confidence_ge_095_count": 162,
+  "low_confidence_count": 146
+}

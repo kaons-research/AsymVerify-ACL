@@ -1,0 +1,33 @@
+\documentclass[border=2mm]{standalone}
+\input{common.tex}
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ---- geometry ----
+  \def\hB{4.5}      % height of tall reference bar (924)
+  \pgfmathsetmacro{\hA}{457/924*\hB}   % bar A proportional to 457
+  \def\bw{2.5}      % bar width
+  \def\pad{1.4}     % left/right padding
+  \def\gap{2.9}     % gap between bars
+  % bar x-positions
+  \def\axL{\pad}
+  \pgfmathsetmacro{\axR}{\pad+\bw}
+  \pgfmathsetmacro{\bxL}{\pad+\bw+\gap}
+  \pgfmathsetmacro{\bxR}{\pad+\bw+\gap+\bw}
+  \pgfmathsetmacro{\cA}{(\axL+\axR)/2}
+  \pgfmathsetmacro{\cB}{(\bxL+\bxR)/2}
+  \pgfmathsetmacro{\Wtot}{2*\pad+2*\bw+\gap}
+  % ---- faint top gridline at max ----
+  \draw[line width=0.5pt,slateA!45] (0.45,\hB) -- ({\Wtot-0.45},\hB);
+  % ---- bars ----
+  \fill[purpleBrand] (\axL,0) rectangle (\axR,\hA);
+  \fill[slateA]      (\bxL,0) rectangle (\bxR,\hB);
+  % ---- baseline ----
+  \draw[line width=1pt,inkA] (0.45,0) -- ({\Wtot-0.45},0);
+  % ---- value labels above bars ----
+  \node[inkA,font=\Large\bfseries,anchor=south] at (\cA,{\hA+0.12}) {457};
+  \node[inkA,font=\Large\bfseries,anchor=south] at (\cB,{\hB+0.12}) {924};
+  % ---- category labels below baseline ----
+  \node[inkA,font=\large,anchor=north] at (\cA,-0.18) {AsymVerify};
+  \node[inkA,font=\large,anchor=north] at (\cB,-0.18) {all passes};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,122 @@
+% beamerthemeAsymVerify.sty
+% A fresh beamerposter theme for the AsymVerify SemEval-2026 poster.
+% NeurIPS-style purple / lavender identity. Built for A0 portrait.
+% Not derived from the Paris-Saclay charter (used only as a mechanical reference).
+
+\ProvidesPackage{beamerthemeAsymVerify}
+\mode<presentation>
+
+% ---------------------------------------------------------------------------
+% Packages
+% ---------------------------------------------------------------------------
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,backgrounds,fit,shapes.geometric,shapes.misc}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\RequirePackage{booktabs}
+\RequirePackage{microtype}
+\RequirePackage{fontawesome5}
+\RequirePackage{qrcode}
+
+% ---------------------------------------------------------------------------
+% Fonts: Times (newtx) throughout, the ACL house face
+% ---------------------------------------------------------------------------
+\usefonttheme{professionalfonts}
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
+\renewcommand{\familydefault}{\rmdefault}
+
+% ---------------------------------------------------------------------------
+% Palette (NeurIPS purple / lavender)
+% ---------------------------------------------------------------------------
+\definecolor{purpleDeep}{HTML}{3B2A6B}
+\definecolor{purpleBrand}{HTML}{5B3C9E}
+\definecolor{violetA}{HTML}{7E5BC2}
+\definecolor{lavender}{HTML}{ECE7F7}
+\definecolor{lavenderTwo}{HTML}{DCD2F0}
+\definecolor{inkA}{HTML}{211B33}
+\definecolor{passOne}{HTML}{3F4DA8}
+\definecolor{passTwo}{HTML}{D24B7A}
+\definecolor{passThree}{HTML}{2E9E6B}
+\definecolor{goldA}{HTML}{E8B53A}
+\definecolor{paperBG}{HTML}{FBFAFE}
+\definecolor{slateA}{HTML}{8C86A0}
+
+% Semantic aliases for the three response classes
+\colorlet{crColor}{passThree}   % Clear Reply  -> emerald
+\colorlet{ambColor}{purpleBrand}% Ambivalent   -> brand purple (the hub)
+\colorlet{cnrColor}{passTwo}    % Clear Non-Reply -> rose
+
+% ---------------------------------------------------------------------------
+% Base beamer colors
+% ---------------------------------------------------------------------------
+\setbeamercolor{normal text}{fg=inkA,bg=paperBG}
+\setbeamercolor{background canvas}{bg=paperBG}
+\setbeamercolor{structure}{fg=purpleBrand}
+\setbeamercolor{item}{fg=purpleBrand}
+\setbeamercolor{itemize item}{fg=purpleBrand}
+\setbeamercolor{itemize subitem}{fg=violetA}
+
+% Strip all beamer chrome; the poster manages its own bands.
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{navigation symbols}{}
+
+% Itemize markers
+\setbeamertemplate{itemize item}{\raisebox{0.1ex}{\small\textcolor{purpleBrand}{\faCaretRight}}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.1ex}{\footnotesize\textcolor{violetA}{\faAngleRight}}}
+\setlength{\leftmargini}{1.1em}
+
+% ---------------------------------------------------------------------------
+% Reusable building blocks
+% ---------------------------------------------------------------------------
+
+% Section card: a lavender panel with an integrated deep-purple title bar.
+% Usage: \begin{pcard}{Title}[optional tcolorbox overrides] ... \end{pcard}
+\newtcolorbox{pcard}[2][]{%
+  enhanced, breakable=false,
+  colback=lavender, colframe=purpleDeep, boxrule=0.4pt,
+  arc=3mm, outer arc=3mm,
+  title={#2}, coltitle=white, fonttitle=\Large\bfseries,
+  colbacktitle=purpleDeep,
+  top=2.5mm, bottom=2.5mm, left=4mm, right=4mm,
+  toptitle=1.6mm, bottomtitle=1.6mm, lefttitle=4mm,
+  #1%
+}
+
+% Plain white card (no title bar) for figures that supply their own caption.
+\newtcolorbox{wcard}[1][]{%
+  enhanced, breakable=false,
+  colback=white, colframe=lavenderTwo, boxrule=0.6pt,
+  arc=3mm, top=2.5mm, bottom=2.5mm, left=4mm, right=4mm,
+  #1%
+}
+
+% Stat card for the headline strip: big numeral over a small caption.
+% Usage: \statcard{0.85}{Macro F1\\(D_eval)}
+\newcommand{\statnum}[1]{{\fontsize{56}{60}\selectfont\bfseries\color{purpleBrand}#1}}
+\newcommand{\statcap}[1]{{\large\color{inkA}#1}}
+\newtcolorbox{statbox}{%
+  enhanced, halign=center, valign=center, nobeforeafter,
+  colback=lavender, colframe=violetA, boxrule=0.5pt, arc=3mm,
+  top=4mm, bottom=4mm, left=2mm, right=2mm,
+}
+
+% Class chip: a small rounded colored tag with white bold text.
+% Usage: \classchip{crColor}{CR}
+\newcommand{\classchip}[2]{%
+  \tikz[baseline=(cc.base)]{\node[fill=#1, text=white, rounded corners=2.2mm,
+    inner xsep=3mm, inner ysep=1.6mm, font=\bfseries](cc){#2};}}
+
+% A purple section rule used inside cards to separate sub-sections.
+\newcommand{\cardrule}{\par\smallskip{\color{lavenderTwo}\hrule height 1pt}\smallskip}
+
+% Inline pass tag (P1/P2/P3) in its semantic color.
+\newcommand{\ptag}[2]{\textcolor{#1}{\textbf{#2}}}
+
+% Booktabs niceties
+\setlength{\heavyrulewidth}{1.1pt}
+\setlength{\lightrulewidth}{0.6pt}
+\renewcommand{\arraystretch}{1.18}
+
+\mode<all>

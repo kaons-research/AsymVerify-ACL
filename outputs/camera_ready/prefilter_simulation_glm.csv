@@ -1,0 +1,3 @@
+variant,macro_f1,accuracy,p3_calls,false_upgrades
+No prefilter,0.729823,0.753247,120,19
+Lexical prefilter,0.746964,0.788961,3,0

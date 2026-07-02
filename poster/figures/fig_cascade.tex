@@ -1,0 +1,58 @@
+\documentclass[border=2mm]{standalone}
+\input{common.tex}
+\begin{document}
+\begin{tikzpicture}[font=\Large, every node/.style={font=\Large}]
+
+  % bump edge-label + arrow weights for a large poster figure
+  \tikzset{
+    lbl/.append style={font=\large, inner sep=2.5pt, align=center},
+    fl/.append style ={line width=2pt},
+    flf/.append style={line width=1.6pt},
+  }
+
+  % ================= top band : fast / happy path (y = 0) =================
+  \node[io, minimum width=4.0cm, minimum height=2.7cm] (qa) at (0,0)
+        {Question\\+ Answer};
+  \node[p1n, minimum width=6.4cm, minimum height=3.0cm] (p1) at (7.0,0)
+        {\textbf{Pass 1}\\[2pt]Base classifier\\[1pt]{\large label + confidence $c$}};
+  \node[gate, minimum width=3.8cm, minimum height=2.6cm] (gate) at (13.8,0)
+        {$c \ge \tau$?\\[2pt]{\large $\tau{=}0.95$}};
+  \node[outn, minimum width=3.6cm, minimum height=2.7cm] (out) at (21.6,0)
+        {\textbf{Output}\\[2pt]\Large\checkmark};
+
+  % ================= slow path : junction + Pass 2 / Pass 3 =================
+  \coordinate (J) at (13.8,-3.4);
+  \node[p2n, minimum width=5.4cm, minimum height=3.0cm] (p2) at (9.2,-6.6)
+        {\textbf{Pass 2}\\[2pt]downgrade\\[1pt]{\large CR/CNR $\to$ AMB}};
+  \node[p3n, minimum width=5.4cm, minimum height=3.0cm] (p3) at (19.4,-6.6)
+        {\textbf{Pass 3}\\[2pt]upgrade\\[1pt]{\large AMB $\to$ CR}};
+
+  % ---------------- edges ----------------
+  \draw[fl] (qa) -- (p1);
+  \draw[fl] (p1) -- (gate);
+
+  % fast exit : straight across the top
+  \draw[fl] (gate) -- (out)
+        node[lbl, midway, above=2.2mm] {yes:\ $c\ge0.95$\\(52.6\% exit)};
+
+  % no : drop from the gate to the routing junction
+  \draw[fl] (gate) -- (J)
+        node[lbl, pos=0.55, right=1.5mm] {no:\ $c<0.95$};
+
+  % junction -> the two slow passes (orthogonal, no box crossings)
+  \draw[fl] (J) -| (p2) node[lbl, pos=0.78] {CR / CNR};
+  \draw[fl] (J) -| (p3) node[lbl, pos=0.78] {AMB};
+
+  % downgrade hand-off
+  \draw[fl] (p2) -- (p3)
+        node[lbl, midway, above=0.8mm] {downgraded $\to$ AMB};
+
+  % pass-3 result -> output (leaves from the top-right so it clears the AMB feed)
+  \draw[fl] (p3.north east) -- (out.south);
+
+  % pass-2 "stays" -> output : dashed bypass under Pass 3, up the right side
+  \draw[flf] (p2.south) -- ++(0,-0.8) -| (out.south east)
+        node[lbl, pos=0.33] {stays CR/CNR};
+
+\end{tikzpicture}
+\end{document}

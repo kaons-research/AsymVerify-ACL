@@ -1,0 +1,41 @@
+% common.tex  -  shared preamble for AsymVerify standalone figures.
+% Times (ACL house face) + the poster palette + flow-diagram styles.
+% Used by each fig_*.tex:  \documentclass[border=2mm]{standalone}\input{common.tex}
+\usepackage[T1]{fontenc}
+\usepackage{lato}
+\usepackage{newtxmath}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,backgrounds,fit,shapes.geometric,shapes.misc}
+\usepackage{xcolor}
+
+% ---- Palette (must match beamerthemeAsymVerify.sty) ----
+\definecolor{purpleDeep}{HTML}{3B2A6B}
+\definecolor{purpleBrand}{HTML}{5B3C9E}
+\definecolor{violetA}{HTML}{7E5BC2}
+\definecolor{lavender}{HTML}{ECE7F7}
+\definecolor{lavenderTwo}{HTML}{DCD2F0}
+\definecolor{inkA}{HTML}{211B33}
+\definecolor{passOne}{HTML}{3F4DA8}
+\definecolor{passTwo}{HTML}{D24B7A}
+\definecolor{passThree}{HTML}{2E9E6B}
+\definecolor{goldA}{HTML}{E8B53A}
+\definecolor{paperBG}{HTML}{FBFAFE}
+\definecolor{slateA}{HTML}{8C86A0}
+\colorlet{crColor}{passThree}
+\colorlet{ambColor}{purpleBrand}
+\colorlet{cnrColor}{passTwo}
+
+% ---- Flow-diagram node + edge styles ----
+\tikzset{
+  io/.style   ={rounded corners=3mm, draw=violetA,   line width=1.2pt, fill=lavender,     align=center, inner sep=3mm},
+  p1n/.style  ={rounded corners=3mm, draw=passOne,   line width=1.6pt, fill=passOne!12,   align=center, inner sep=3.5mm},
+  p2n/.style  ={rounded corners=3mm, draw=passTwo,   line width=1.6pt, fill=passTwo!12,   align=center, inner sep=3.5mm},
+  p3n/.style  ={rounded corners=3mm, draw=passThree, line width=1.6pt, fill=passThree!12, align=center, inner sep=3.5mm},
+  outn/.style ={rounded corners=3mm, draw=passThree, line width=1.6pt, fill=passThree!16, align=center, inner sep=3.5mm},
+  gate/.style ={diamond, draw=goldA, line width=1.6pt, fill=goldA!25, align=center, inner sep=1.5mm, aspect=1.7},
+  fl/.style   ={-{Stealth[length=4mm,width=3.5mm]}, line width=1.5pt, draw=purpleDeep},
+  flf/.style  ={-{Stealth[length=3.5mm,width=3mm]}, line width=1.1pt, draw=passTwo, densely dashed},
+  lbl/.style  ={font=\small, fill=white, inner sep=1.5pt, text=inkA, rounded corners=1pt},
+}

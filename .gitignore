@@ -1,0 +1,53 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Model/output scratch files
+outputs/*
+!outputs/camera_ready/
+outputs/camera_ready/*
+!outputs/camera_ready/*.csv
+!outputs/camera_ready/*.tex
+!outputs/camera_ready/summary_public.json
+
+# LaTeX build products
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/main *.aux
+paper/main *.bbl
+paper/main *.blg
+paper/main *.fdb_latexmk
+paper/main *.fls
+paper/main *.log
+paper/main *.out
+
+# Archives and platform noise
+*.zip
+*.tar.gz
+.DS_Store
+
+# Poster build products
+poster/*.aux
+poster/*.log
+poster/*.nav
+poster/*.out
+poster/*.snm
+poster/*.toc
+poster/figures/*.aux
+poster/figures/*.log
+poster/assets/*.aux
+poster/assets/*.log
